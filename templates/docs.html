@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        p {
+            margin: 5px 0;
+        }
+        code {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        .endpoint {
+            margin-bottom: 20px;
+        }
+        .param, .response {
+            margin-left: 20px;
+        }
+        .param-item, .response-item {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>API Documentation</h1>
+
+    <div class="endpoint">
+        <h2>GET /trusted_ips</h2>
+        <p>Fetches the list of trusted IPs from the database.</p>
+        <h3>Response</h3>
+        <div class="response">
+            <div class="response-item">
+                <code>200 OK</code>: Returns a JSON array of trusted IPs.<br>
+                <code>500 Internal Server Error</code>: If there is an error fetching IPs.
+            </div>
+        </div>
+    </div>
+
+    <div class="endpoint">
+        <h2>GET /insert_key</h2>
+        <p>Inserts a new key-value pair into the database. Requires API key for authentication.</p>
+        <h3>Parameters</h3>
+        <div class="param">
+            <div class="param-item">
+                <code>k1</code> (string): First part of the key. (required)
+            </div>
+            <div class="param-item">
+                <code>k2</code> (string): Second part of the key. (required)
+            </div>
+            <div class="param-item">
+                <code>v</code> (string): Value to store. (required)
+            </div>
+        </div>
+        <h3>Response</h3>
+        <div class="response">
+            <div class="response-item">
+                <code>200 OK</code>: Returns a success message.<br>
+                <code>400 Bad Request</code>: If any parameter is missing.<br>
+                <code>500 Internal Server Error</code>: If there is an error inserting the data.
+            </div>
+        </div>
+    </div>
+
+    <div class="endpoint">
+        <h2>GET /get_key_db</h2>
+        <p>Fetches the value for a specific key from the database. Requires API key for authentication.</p>
+        <h3>Parameters</h3>
+        <div class="param">
+            <div class="param-item">
+                <code>k1</code> (string): First part of the key. Use "all" to fetch all keys. (required)
+            </div>
+            <div class="param-item">
+                <code>k2</code> (string): Second part of the key. (required if k1 is not "all")
+            </div>
+        </div>
+        <h3>Response</h3>
+        <div class="response">
+            <div class="response-item">
+                <code>200 OK</code>: Returns the value for the specified key.<br>
+                <code>400 Bad Request</code>: If any required parameter is missing.<br>
+                <code>500 Internal Server Error</code>: If there is an error fetching the data.
+            </div>
+        </div>
+    </div>
+
+    <div class="endpoint">
+        <h2>GET /add_trusted_ip</h2>
+        <p>Adds a new trusted IP to the database. Requires API key for authentication.</p>
+        <h3>Parameters</h3>
+        <div class="param">
+            <div class="param-item">
+                <code>ip</code> (string): IP address to add. (required)
+            </div>
+        </div>
+        <h3>Response</h3>
+        <div class="response">
+            <div class="response-item">
+                <code>200 OK</code>: Returns a success message.<br>
+                <code>400 Bad Request</code>: If IP is not provided.<br>
+                <code>500 Internal Server Error</code>: If there is an error adding the IP.
+            </div>
+        </div>
+    </div>
+
+    <div class="endpoint">
+        <h2>GET /remove_ip</h2>
+        <p>Removes a trusted IP from the database. Requires API key for authentication.</p>
+        <h3>Parameters</h3>
+        <div class="param">
+            <div class="param-item">
+                <code>ip</code> (string): IP address to remove. (required)
+            </div>
+        </div>
+        <h3>Response</h3>
+        <div class="response">
+            <div class="response-item">
+                <code>200 OK</code>: Returns a success message.<br>
+                <code>400 Bad Request</code>: If IP is not provided.<br>
+                <code>500 Internal Server Error</code>: If there is an error removing the IP.
+            </div>
+        </div>
+    </div>
+
+    <div class="endpoint">
+        <h2>GET /update_config</h2>
+        <p>Updates the configuration setting for blocking IPs. Requires API key for authentication.</p>
+        <h3>Parameters</h3>
+        <div class="param">
+            <div class="param-item">
+                <code>block_ips</code> (string): New value for blocking IPs ("1" for true, "0" for false). (required)
+            </div>
+        </div>
+        <h3>Response</h3>
+        <div class="response">
+            <div class="response-item">
+                <code>200 OK</code>: Returns a success message with the new setting.<br>
+                <code>400 Bad Request</code>: If the parameter is not provided or invalid.
+            </div>
+        </div>
+    </div>
+
+    <div class="endpoint">
+        <h2>GET /getAllIps</h2>
+        <p>Fetches all trusted IPs from the database. Requires API key for authentication.</p>
+        <h3>Response</h3>
+        <div class="response">
+            <div class="response-item">
+                <code>200 OK</code>: Returns a JSON array of trusted IPs.<br>
+                <code>500 Internal Server Error</code>: If there is an error fetching IPs.
+            </div>
+        </div>
+    </div>
+
+    <div class="endpoint">
+        <h2>GET /getFirewallStatus</h2>
+        <p>Fetches the current firewall status. Requires API key for authentication.</p>
+        <h3>Response</h3>
+        <div class="response">
+            <div class="response-item">
+                <code>200 OK</code>: Returns the current status of the firewall (true/false).
+            </div>
+        </div>
+    </div>
+</body>
+</html>
